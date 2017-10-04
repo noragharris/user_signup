@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 app.config['DEBUG'] = True
 
-# TODO: If errors, re=render the form with feedback 
+# COMPLETE: If errors, re=render the form with feedback 
 #   next to the field it refers to
 # COMPLETE: Username cannot be empty
 # COMPLETE: Password cannot be empty
@@ -16,8 +16,8 @@ app.config['DEBUG'] = True
 # COMPLETE: Password and verified password must match
 # COMPLETE: Preserve what user typed for username and email even if error
 # COMPLETE: Clear password and verified password if error
-# TODO: Show a welcome page if everything is valid "Welcome, [username]"
-# TODO: Use templates for index/homepage
+# COMPLETE: Show a welcome page if everything is valid "Welcome, [username]"
+# COMPLETE: Use templates for index/homepage
 # COMPLETE: Make email a text input
 # COMPLETE: If they enter an email, must contain a single @, a single ., 
 #   no spaces, and between 3 and 20 characters long.
@@ -72,8 +72,7 @@ def validate_entry():
     if not username_error and not password_error and not verified_password_error and not email_error:
         return render_template('welcome.html', username=username)
     else:
-        return render_template('base.html')
-    
+        return render_template('base.html', username=username, email=email, username_error=username_error, password_error=password_error, verified_password_error=verified_password_error, email_error=email_error)
     
 
 @app.route("/")
