@@ -5,7 +5,44 @@
 </head>
 <body>
     <h1>User Signup</h1>
+    <br>
+    <form action="/", method="POST">
+        <table>
+            <tr>
+                <td>
+                    <label for="username">Username:</label>
+                </td>
+                <td>
+                    <input type="text" name="username" id="username" value="{{ username }}" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="password">Password:</label>
+                </td>
+                <td>
+                    <input type="password" name="password" id="password" value = "{{ password }}"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="verified_password">Verify your Password:</label>
+                </td>
+                <td>
+                    <input type="password" name="verified_password" id="verified_password" value = "{{ verified_password }}" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="email">Email: </label>
+                </td>
+                <td>
+                    <input type="text" name="email" id="email" value = "{{ email }}" />
+                </td>
+            </tr>
+        </table>
+        <input type="submit" value="Sign me up!" />
+    </form>
 
-    
 </body>
 </html>
