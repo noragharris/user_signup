@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, redirect, render_template, url_for
 
 app = Flask(__name__)
 
@@ -47,17 +47,13 @@ def validate_entry():
         password = ''
     elif " " in password:
         password_error = "Password cannot contain spaces."
-        password = ''
     elif len(password) < 3 or len(password) > 20:
         password_error = "Password must be between 3 and 20 characters."
-        password = ''
 
     if not verified_password:
         verified_password_error = "Please re-enter your password."
-        verified_password = ''
     elif verified_password != password:
         verified_password_error = "Verified password must equal password."
-        verified_password = ''
 
     if email:
         if email.count("@") < 1 or email.count("@") > 1:
@@ -70,10 +66,13 @@ def validate_entry():
             email_error = "Email must be between 3 and 20 characters."
     
     if not username_error and not password_error and not verified_password_error and not email_error:
-        return render_template('welcome.html', username=username)
+        return redirect(url_for('welcome', username=username))
     else:
         return render_template('base.html', username=username, email=email, username_error=username_error, password_error=password_error, verified_password_error=verified_password_error, email_error=email_error)
-    
+
+@app.route("/welcome")
+def welcome():
+    return render_template('welcome.html', username=request.args.get('username'))  
 
 @app.route("/")
 def index():
